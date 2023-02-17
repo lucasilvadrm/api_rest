@@ -12,6 +12,7 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'class-methods-use-this': 'off',
-    'import/no-extraneous-dependencies': false,
+    'import/no-extraneous-dependencies': 'off',
+    'import/first': 'off',
   },
 };
