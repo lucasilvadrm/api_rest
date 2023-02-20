@@ -5,8 +5,9 @@ class UserController {
   async store(req, res) {
     try {
       const novoUser = await User.create(req.body);
-      const { id, name, email } = novoUser;
-      return res.json({ id, name, email });
+      const { id, nome, email } = novoUser;
+
+      return res.json({ id, nome, email });
     } catch (error) {
       return res.status(400).json({
         errors: error.errors.map((err) => err.message),
@@ -18,7 +19,13 @@ class UserController {
   async index(req, res) {
     try {
       const users = await User.findAll();
-      return res.json(users);
+      const usersMod = users?.map((user) => ({
+        id: user.id,
+        nome: user.nome,
+        email: user.email,
+      }));
+
+      return res.json(usersMod);
     } catch (error) {
       return res.json(null);
     }
@@ -49,8 +56,8 @@ class UserController {
       }
 
       const novosDados = await user.update(req.body);
-      const { id, name, email } = novosDados;
-      return res.json({ id, name, email });
+      const { id, nome, email } = novosDados;
+      return res.json({ id, nome, email });
     } catch (error) {
       return res.status(400).json({
         errors: error.errors.map((err) => err.message),
